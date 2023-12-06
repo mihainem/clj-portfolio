@@ -1,0 +1,5 @@
+{:api/server {:handler #ig/ref :api/router
+              :port 3000}
+ :api/router {:jdbc-url #ig/ref :api/db}
+ :api/db {:jdbc-url "jdbc-url"}}
+
