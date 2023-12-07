@@ -29,12 +29,12 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        
+      - name: Build ClojureScript
+        run: npx shadow-cljs release app
 
       - name: Build styles
         run: npm run build-styles
-
-      - name: Build ClojureScript
-        run: npx shadow-cljs release app
 
       - name: Deploy to GitHub Pages
         run: |
