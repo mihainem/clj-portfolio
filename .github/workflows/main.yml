@@ -1,0 +1,43 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main # adjust this to your main branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      GH_EMAIL: ${{ secrets.USER_MAIL }}
+      GH_NAME: ${{ secrets.USER_NAME }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build ClojureScript
+        run: npx shadow-cljs release app
+
+      - name: Deploy to GitHub Pages
+        run: |
+          mkdir docs
+          mv -v resources/public/* docs/
+        if: success()
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.email "${GH_EMAIL}"
+          git config --global user.name "${GH_NAME}"
+          git add docs
+          git commit -m "Auto-build and deploy to GitHub Pages"
+          git push
