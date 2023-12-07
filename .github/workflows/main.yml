@@ -9,10 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      GH_EMAIL: ${{ secrets.USER_MAIL }}
-      GH_NAME: ${{ secrets.USER_NAME }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -47,8 +43,8 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config user.email "${GH_EMAIL}"
-          git config user.name "${GH_NAME}"
+          git config user.email "${{ secrets.USER_MAIL }}"
+          git config user.name "${{ secrets.USER_NAME }}"
           git add docs
           git commit -m "Auto-build and deploy to GitHub Pages"
           git push
