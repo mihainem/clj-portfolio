@@ -28,3 +28,4 @@ target/
 .shadow-cljs
 node_modules
 resources/public/assets
+!resources/public/assets/js/main.js

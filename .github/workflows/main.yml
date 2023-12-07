@@ -38,6 +38,7 @@ jobs:
 
       - name: Deploy to GitHub Pages
         run: |
+          rm -rf docs
           mkdir docs
           mv -v resources/public/* docs/
         if: success()
@@ -46,6 +47,7 @@ jobs:
         run: |
           git config user.email "mihai@simion.dev"
           git config user.name "Mihai S"
+          git branch "gh-pages"
           git add docs
           git commit -m "Auto-build and deploy to GitHub Pages"
           git push
