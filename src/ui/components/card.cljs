@@ -1,9 +1,10 @@
 (ns ui.components.card)
 
-(defn card []
-  [:div
-   {:class "rounded overflow-hidden shadow-lg"}
-   [:img {:class "w-full", :src "/assets/images/img_avatar2.png", :alt "Mountain"}]
+(defn card [n]
+  [:div ;;https://api.unsplash.com/photos/?client_id=YOUR_ACCESS_KEY
+   {:key n
+    :class "rounded overflow-hidden shadow-lg"}
+   [:img {:class "w-full", :src "https://source.unsplash.com/random/photos?query=game&topics=game", :alt "Mountain"}] ;;/assets/images/img_avatar2.png
    [:div
     {:class "px-6 py-4"}
     [:div {:class "font-bold text-xl mb-2"} "Mountain"]
