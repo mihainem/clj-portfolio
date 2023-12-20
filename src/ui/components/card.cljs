@@ -7,7 +7,7 @@
      {:key (random-uuid)
       ;;on-click open new browser window to url
       :on-click (fn [e] (js/window.open url "_blank"))
-      :class "rounded overflow-hidden shadow-lg"}
+      :class "cursor-pointer rounded overflow-hidden shadow-lg"}
      [:img {:class "w-full", :src "https://source.unsplash.com/random/photos?topics=game", :alt "game"}] ;;/assets/images/img_avatar2.png
      [:div
       {:class "px-6 py-4"}
