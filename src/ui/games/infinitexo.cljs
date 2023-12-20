@@ -19,7 +19,9 @@
   (vec (repeat size (vec (repeat size "B")))))
 
 
-(def app-state (atom {:text "Infinite XO"
+(def app-state (atom {:title "Infinite XO"
+                      :description "Infinite XO is a game where you have to get 5 in a row to win."
+                      :tags ["clojurescript" "reagent" "tailwindcss"]
                       :board (new-board 10)
                       :current-player -1
                       :current-state "B"}))
@@ -128,29 +130,28 @@
             :cy (+ j 0.5)}])
 
 
-
-
 (defn infinitexo []
-  [:center
-   [:h1 (:text @app-state)]
-   (let [n 10]
-     [:svg
-      {:view-box [0 0 n n]
-       :width 400
-       :height 400}
-      (for [i (range n)
-            j (range n)] ;;[0 1 2 3 4] [0 1 2 3 4]
-        ^{:key (+ (* i n) j)}
-        (case (get-in @app-state [:board j i])
-          "B" [blank i j]
-          "X" [cross i j]
-          "I" [line i j]
-          "O" [circle i j]))])
-   [:p [:button {:on-click new-game-click} "New Game"]]])
+  [:div {:id "gameplay"}
+   [:center
+    [:h1 (:text @app-state)]
+    (let [n 10]
+      [:svg
+       {:view-box [0 0 n n]
+        :width 400
+        :height 400}
+       (for [i (range n)
+             j (range n)] ;;[0 1 2 3 4] [0 1 2 3 4]
+         ^{:key (+ (* i n) j)}
+         (case (get-in @app-state [:board j i])
+           "B" [blank i j]
+           "X" [cross i j]
+           "I" [line i j]
+           "O" [circle i j]))])
+    [:p [:button {:on-click new-game-click} "New Game"]]]])
 
 (defn start-game []
   (rd/render [infinitexo]
-             (. js/document (getElementById "game"))))
+             (. js/document (getElementById "gameplay"))))
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on
